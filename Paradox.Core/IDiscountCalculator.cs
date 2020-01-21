@@ -2,6 +2,9 @@
 {
     public interface IDiscountCalculator
     {
-        double Calculate(double discount, double price);
+        double Discount { get; set; }
+        double Price { get; set; }
+        
+        double Calculate();
     }
 }

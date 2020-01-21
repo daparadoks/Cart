@@ -4,17 +4,23 @@ namespace Paradox.Core
 {
     public class RateDiscountCalculator: IDiscountCalculator
     {
-        public double Calculate(double price, double discount)
+        public double Discount { get; set; }
+        public double Price { get; set; }
+
+        public double Calculate()
         {
-            return MathHelper.Percentage(price, (int) discount);
+            return MathHelper.Percentage(Price, (int) Discount);
         }
     }
 
     public class AmountDiscountCalculator : IDiscountCalculator
     {
-        public double Calculate(double price, double discount)
+        public double Discount { get; set; }
+        public double Price { get; set; }
+
+        public double Calculate()
         {
-            return discount;
+            return Discount;
         }
     }
 
@@ -29,7 +35,9 @@ namespace Paradox.Core
         }
         public static double Calculate(DiscountType direction, double price, double discount)
         {
-            return Calculators[direction].Calculate(price, discount);
+            Calculators[direction].Price = price;
+            Calculators[direction].Discount = discount;
+            return Calculators[direction].Calculate();
         }
     }
 }
